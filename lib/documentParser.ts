@@ -196,8 +196,8 @@ export function parseRawResumeText(text: string): ParsedResumeData {
           if (currentItem) {
             experience.push({
               id: generateId(),
-              company: currentItem.company || "Company",
-              role: currentItem.role || "Role",
+              company: currentItem.company || "",
+              role: currentItem.role || "",
               dates: currentItem.dates || "",
               description: currentItem.description || "",
             });
@@ -222,8 +222,8 @@ export function parseRawResumeText(text: string): ParsedResumeData {
       if (currentItem) {
         experience.push({
           id: generateId(),
-          company: currentItem.company || "Company",
-          role: currentItem.role || "Role",
+          company: currentItem.company || "",
+          role: currentItem.role || "",
           dates: currentItem.dates || "",
           description: currentItem.description || "",
         });
@@ -236,8 +236,8 @@ export function parseRawResumeText(text: string): ParsedResumeData {
           if (currentItem) {
             education.push({
               id: generateId(),
-              school: currentItem.school || "University",
-              degree: currentItem.degree || "Degree",
+              school: currentItem.school || "",
+              degree: currentItem.degree || "",
               dates: currentItem.dates || "",
             });
           }
@@ -256,8 +256,8 @@ export function parseRawResumeText(text: string): ParsedResumeData {
       if (currentItem) {
         education.push({
           id: generateId(),
-          school: currentItem.school || "University",
-          degree: currentItem.degree || "Degree",
+          school: currentItem.school || "",
+          degree: currentItem.degree || "",
           dates: currentItem.dates || "",
         });
       }
@@ -297,33 +297,6 @@ export function parseRawResumeText(text: string): ParsedResumeData {
     }
   }
   flushSection(currentSection, sectionLines);
-
-  // Fallback skills search if section headers weren't found
-  if (skills.length === 0) {
-    const commonTech = [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Node.js",
-      "Python",
-      "Java",
-      "HTML",
-      "CSS",
-      "Tailwind",
-      "SQL",
-      "Git",
-      "Docker",
-      "AWS",
-      "Figma",
-    ];
-    for (const tech of commonTech) {
-      const reg = new RegExp(`\\b${tech}\\b`, "i");
-      if (reg.test(trimmed) && !skills.includes(tech)) {
-        skills.push(tech);
-      }
-    }
-  }
 
   // Deduplicate skills
   const uniqueSkills = Array.from(new Set(skills));

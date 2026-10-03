@@ -35,10 +35,10 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
         className={`w-[210mm] min-h-[297mm] p-10 bg-white text-black shadow-lg mx-auto box-border font-sans print:shadow-none print:w-full print:min-h-0 print:p-8 ${className}`}
         style={{ boxSizing: "border-box" }}
       >
-        {/* Header Section */}
+        {/* Header Section - Preserves exact user case and formatting */}
         {personalInfo.name && (
           <header className="border-b-2 border-gray-900 pb-4 mb-6">
-            <h1 className="text-3xl font-bold uppercase tracking-wider text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
               {personalInfo.name}
             </h1>
             {hasContact && (
@@ -75,7 +75,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
         {/* Work Experience Section */}
         {hasExperience && (
           <section className="mb-6">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-900 border-b border-gray-300 pb-1 mb-3">
+            <h2 className="text-sm font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
               Work Experience
             </h2>
             <div className="space-y-4">
@@ -86,17 +86,17 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 return (
                   <div key={item.id} className="text-sm">
                     <div className="flex justify-between items-baseline">
-                      <span className="font-semibold text-gray-900">
-                        {item.role || "Role"}
-                        {item.company && (
-                          <span className="font-normal text-gray-600">
-                            {" "}
-                            — {item.company}
-                          </span>
+                      <div className="text-sm text-gray-900">
+                        {item.role && <span className="font-semibold">{item.role}</span>}
+                        {item.role && item.company && (
+                          <span className="text-gray-600"> — </span>
                         )}
-                      </span>
+                        {item.company && (
+                          <span className="text-gray-700">{item.company}</span>
+                        )}
+                      </div>
                       {item.dates && (
-                        <span className="text-xs text-gray-500 font-medium">
+                        <span className="text-xs text-gray-500 font-medium shrink-0 ml-4">
                           {item.dates}
                         </span>
                       )}
@@ -116,7 +116,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
         {/* Education Section */}
         {hasEducation && (
           <section className="mb-6">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-900 border-b border-gray-300 pb-1 mb-3">
+            <h2 className="text-sm font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
               Education
             </h2>
             <div className="space-y-3">
@@ -127,17 +127,19 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
                 return (
                   <div key={item.id} className="text-sm">
                     <div className="flex justify-between items-baseline">
-                      <span className="font-semibold text-gray-900">
-                        {item.degree || "Degree"}
-                        {item.school && (
-                          <span className="font-normal text-gray-600">
-                            {" "}
-                            — {item.school}
-                          </span>
+                      <div className="text-sm text-gray-900">
+                        {item.degree && (
+                          <span className="font-semibold">{item.degree}</span>
                         )}
-                      </span>
+                        {item.degree && item.school && (
+                          <span className="text-gray-600"> — </span>
+                        )}
+                        {item.school && (
+                          <span className="text-gray-700">{item.school}</span>
+                        )}
+                      </div>
                       {item.dates && (
-                        <span className="text-xs text-gray-500 font-medium">
+                        <span className="text-xs text-gray-500 font-medium shrink-0 ml-4">
                           {item.dates}
                         </span>
                       )}
@@ -152,7 +154,7 @@ export const ResumeTemplate = forwardRef<HTMLDivElement, ResumeTemplateProps>(
         {/* Skills Section */}
         {hasSkills && (
           <section className="mb-6">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-900 border-b border-gray-300 pb-1 mb-2">
+            <h2 className="text-sm font-bold text-gray-900 border-b border-gray-300 pb-1 mb-2">
               Skills
             </h2>
             <div className="flex flex-wrap gap-1.5 pt-1">
